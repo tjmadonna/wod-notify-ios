@@ -1,5 +1,5 @@
 //
-//  WodListPresenterImpl.h
+//  WodListPresenter.h
 //  WodNotify
 //
 //  Created by Tyler Madonna on 12/24/19.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WodListPresenterImpl : NSObject <WodListPresenterProtocol>
+@interface WodListPresenter : NSObject <WodListPresenterProtocol>
 
 @property (weak, nonatomic) id<WodListViewProtocol> view;
 
