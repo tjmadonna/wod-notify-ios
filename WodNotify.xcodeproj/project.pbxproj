@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B432E70423B2C2A30036AA04 /* WodListViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70323B2C2A30036AA04 /* WodListViewItem.m */; };
+		B432E70723B2C33E0036AA04 /* WodListPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70623B2C33E0036AA04 /* WodListPresenter.m */; };
+		B432E70B23B2C9040036AA04 /* WodListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B432E70823B2C9040036AA04 /* WodListViewController.xib */; };
+		B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70923B2C9040036AA04 /* WodListViewController.m */; };
 		B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5823B2AFD3001C8391 /* AppDelegate.m */; };
 		B4956B5C23B2AFD3001C8391 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5B23B2AFD3001C8391 /* SceneDelegate.m */; };
 		B4956B5F23B2AFD3001C8391 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5E23B2AFD3001C8391 /* ViewController.m */; };
@@ -16,6 +20,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B432E6FE23B2BAF70036AA04 /* WodListContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodListContract.h; sourceTree = "<group>"; };
+		B432E70223B2C2A30036AA04 /* WodListViewItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodListViewItem.h; sourceTree = "<group>"; };
+		B432E70323B2C2A30036AA04 /* WodListViewItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WodListViewItem.m; sourceTree = "<group>"; };
+		B432E70523B2C33E0036AA04 /* WodListPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodListPresenter.h; sourceTree = "<group>"; };
+		B432E70623B2C33E0036AA04 /* WodListPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WodListPresenter.m; sourceTree = "<group>"; };
+		B432E70823B2C9040036AA04 /* WodListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WodListViewController.xib; sourceTree = "<group>"; };
+		B432E70923B2C9040036AA04 /* WodListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WodListViewController.m; sourceTree = "<group>"; };
+		B432E70A23B2C9040036AA04 /* WodListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WodListViewController.h; sourceTree = "<group>"; };
 		B4956B5423B2AFD3001C8391 /* WodNotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WodNotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4956B5723B2AFD3001C8391 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B4956B5823B2AFD3001C8391 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,6 +57,45 @@
 			children = (
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		B432E6F523B2BA470036AA04 /* WodList */ = {
+			isa = PBXGroup;
+			children = (
+				B432E6FC23B2BAA30036AA04 /* Contract */,
+				B432E6FB23B2BA9B0036AA04 /* ViewController */,
+				B432E6FD23B2BABC0036AA04 /* Presenter */,
+			);
+			path = WodList;
+			sourceTree = "<group>";
+		};
+		B432E6FB23B2BA9B0036AA04 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B432E70A23B2C9040036AA04 /* WodListViewController.h */,
+				B432E70923B2C9040036AA04 /* WodListViewController.m */,
+				B432E70823B2C9040036AA04 /* WodListViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B432E6FC23B2BAA30036AA04 /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				B432E6FE23B2BAF70036AA04 /* WodListContract.h */,
+				B432E70223B2C2A30036AA04 /* WodListViewItem.h */,
+				B432E70323B2C2A30036AA04 /* WodListViewItem.m */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		B432E6FD23B2BABC0036AA04 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B432E70523B2C33E0036AA04 /* WodListPresenter.h */,
+				B432E70623B2C33E0036AA04 /* WodListPresenter.m */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		B4956B4B23B2AFD3001C8391 = {
@@ -123,6 +174,7 @@
 		B4956B7523B2B160001C8391 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				B432E6F523B2BA470036AA04 /* WodList */,
 				B4956B5D23B2AFD3001C8391 /* ViewController.h */,
 				B4956B5E23B2AFD3001C8391 /* ViewController.m */,
 			);
@@ -186,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B432E70B23B2C9040036AA04 /* WodListViewController.xib in Resources */,
 				B4956B6723B2AFD5001C8391 /* LaunchScreen.storyboard in Resources */,
 				B4956B6423B2AFD5001C8391 /* Assets.xcassets in Resources */,
 			);
@@ -198,7 +251,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B432E70423B2C2A30036AA04 /* WodListViewItem.m in Sources */,
+				B432E70723B2C33E0036AA04 /* WodListPresenter.m in Sources */,
 				B4956B5F23B2AFD3001C8391 /* ViewController.m in Sources */,
+				B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */,
 				B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */,
 				B4956B6A23B2AFD5001C8391 /* main.m in Sources */,
 				B4956B5C23B2AFD3001C8391 /* SceneDelegate.m in Sources */,
