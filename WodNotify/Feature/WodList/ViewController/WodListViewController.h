@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WodListViewController : UITableViewController <WodListViewProtocol>
 
-- (instancetype)initWithPresenter:(id<WodListPresenter>)presenter;
+- (instancetype)initWithPresenter:(id<WodListPresenterProtocol>)presenter;
 
 @end
 

@@ -10,14 +10,14 @@
 
 @interface WodListViewController ()
 
-@property (strong, nonatomic) id<WodListPresenter> presenter;
+@property (strong, nonatomic) id<WodListPresenterProtocol> presenter;
 
 @end
 
 
 @implementation WodListViewController
 
-- (instancetype)initWithPresenter:(id<WodListPresenter>)presenter {
+- (instancetype)initWithPresenter:(id<WodListPresenterProtocol>)presenter {
     self = [super init];
     if (self) {
         _presenter = presenter;

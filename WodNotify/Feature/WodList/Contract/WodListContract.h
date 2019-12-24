@@ -23,7 +23,7 @@
 
 #pragma mark - WodListPresenter
 
-@protocol WodListPresenter
+@protocol WodListPresenterProtocol
 
 - (void)setView:(id<WodListViewProtocol>)view;
 
