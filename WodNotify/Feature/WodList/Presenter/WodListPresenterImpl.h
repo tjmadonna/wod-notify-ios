@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WodListPresenterImpl : NSObject <WodListPresenter>
 
-@property (weak, nonatomic) id<WodListView> view;
+@property (weak, nonatomic) id<WodListViewProtocol> view;
 
 @end
 

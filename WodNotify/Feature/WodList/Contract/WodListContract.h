@@ -14,7 +14,7 @@
 
 #pragma mark - WodListView
 
-@protocol WodListView
+@protocol WodListViewProtocol
 
 - (void)presentWodList:(NSArray<WodListViewItem *> *)wodList;
 
@@ -25,7 +25,7 @@
 
 @protocol WodListPresenter
 
-- (void)setView:(id<WodListView>)view;
+- (void)setView:(id<WodListViewProtocol>)view;
 
 @end
 

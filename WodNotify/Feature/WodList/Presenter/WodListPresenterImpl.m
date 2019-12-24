@@ -10,7 +10,7 @@
 
 @implementation WodListPresenterImpl
 
-- (void)setView:(id<WodListView>)view {
+- (void)setView:(id<WodListViewProtocol>)view {
     _view = view;
     NSLog(@"View set on presenter");
 }
