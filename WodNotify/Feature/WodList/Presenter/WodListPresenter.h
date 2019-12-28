@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "WodListContract.h"
+#import "LocalDataManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WodListPresenter : NSObject <WodListPresenterProtocol>
 
 @property (weak, nonatomic) id<WodListViewProtocol> view;
+
+- (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager;
 
 @end
 
