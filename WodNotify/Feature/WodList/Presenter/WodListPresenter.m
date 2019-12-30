@@ -12,14 +12,22 @@
 
 @property (strong, nonatomic) id<LocalDataManagerProtocol> localDataManager;
 
+@property (strong, nonatomic) NSDateFormatter * dateFormatter;
+
 @end
 
 @implementation WodListPresenter
+
+NSString * const kDateDelimiter = @"-";
+
+NSString * const kDateFormat = @"MMMM-dd-EEEE";
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager {
     self = [super init];
     if (self) {
         _localDataManager = localDataManager;
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = kDateFormat;
     }
     return self;
 }
@@ -43,7 +51,7 @@
 
         NSMutableArray<WodListViewItem *> *viewWods = [[NSMutableArray alloc] initWithCapacity:wods.count];
         for (WodEntity *wod in wods) {
-            WodListViewItem *viewWod = [[WodListViewItem alloc] initWithUid:wod.uid date:wod.date title:wod.title author:wod.author];
+            WodListViewItem *viewWod = [self mapWodEntityToWodListViewItem:wod];
             [viewWods addObject:viewWod];
         }
 
@@ -51,6 +59,18 @@
             [self.view presentWodList:viewWods];
         });
     }];
+}
+
+- (WodListViewItem *)mapWodEntityToWodListViewItem:(WodEntity *)wodEntity {
+    NSString *dateString = [self.dateFormatter stringFromDate:wodEntity.date];
+    NSArray<NSString *> *dateComponents = [dateString componentsSeparatedByString:kDateDelimiter];
+
+    return [[WodListViewItem alloc] initWithUid:wodEntity.uid
+                                          month:dateComponents[0]
+                                     dayOfMonth:dateComponents[1]
+                                      dayOfWeek:dateComponents[2]
+                                          title:wodEntity.title
+                                         author:wodEntity.author];
 }
 
 @end
