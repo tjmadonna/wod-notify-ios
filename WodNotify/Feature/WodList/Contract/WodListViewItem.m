@@ -10,11 +10,18 @@
 
 @implementation WodListViewItem
 
-- (instancetype)initWithUid:(NSString *)uid date:(NSDate *)date title:(NSString *)title author:(NSString *)author {
+- (instancetype)initWithUid:(NSString *)uid
+                      month:(NSString *)month
+                 dayOfMonth:(NSString *)dayOfMonth
+                  dayOfWeek:(NSString *)dayOfWeek
+                      title:(NSString *)title
+                     author:(NSString *)author; {
     self = [super init];
     if (self) {
         _uid = uid;
-        _date = date;
+        _month = month;
+        _dayOfMonth = dayOfMonth;
+        _dayOfWeek = dayOfWeek;
         _title = title;
         _author = author;
     }

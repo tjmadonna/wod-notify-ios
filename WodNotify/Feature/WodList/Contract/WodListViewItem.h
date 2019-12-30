@@ -14,13 +14,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy, nonatomic, readonly) NSString * uid;
 
-@property (copy, nonatomic, readonly) NSDate * date;
+@property (copy, nonatomic, readonly) NSString * month;
+
+@property (copy, nonatomic, readonly) NSString * dayOfMonth;
+
+@property (copy, nonatomic, readonly) NSString * dayOfWeek;
 
 @property (copy, nonatomic, readonly) NSString * title;
 
 @property (copy, nonatomic, readonly) NSString * author;
 
-- (instancetype)initWithUid:(NSString *)uid date:(NSDate *)date title:(NSString *)title author:(NSString *)author;
+- (instancetype)initWithUid:(NSString *)uid
+                      month:(NSString *)month
+                 dayOfMonth:(NSString *)dayOfMonth
+                  dayOfWeek:(NSString *)dayOfWeek
+                      title:(NSString *)title
+                     author:(NSString *)author;
 
 @end
 
