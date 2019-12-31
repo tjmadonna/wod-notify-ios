@@ -34,6 +34,7 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
 
 - (void)setView:(id<WodListViewProtocol>)view {
     _view = view;
+    [self fetchWods];
     NSLog(@"View set on presenter");
 }
 
