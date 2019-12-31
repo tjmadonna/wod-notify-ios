@@ -24,6 +24,10 @@
 
 @implementation WodItemCell
 
+NSString *const kWodItemCellCellId = @"WodItemCell";
+
+NSString *const kWodItemCellNibName = @"WodItemCell";
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

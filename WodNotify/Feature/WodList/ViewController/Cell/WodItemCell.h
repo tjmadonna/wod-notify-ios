@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WodItemCell : UITableViewCell
 
+FOUNDATION_EXPORT NSString *const kWodItemCellCellId;
+
+FOUNDATION_EXPORT NSString *const kWodItemCellNibName;
+
 - (void)setWodItem:(WodListViewItem *)wodListItem;
 
 @end
