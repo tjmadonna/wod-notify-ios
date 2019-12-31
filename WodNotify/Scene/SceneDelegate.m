@@ -1,8 +1,9 @@
 #import "SceneDelegate.h"
-#import "WodListViewController.h"
-#import "WodListPresenter.h"
+#import "ApplicationRouter.h"
 
 @interface SceneDelegate ()
+
+@property (strong, nonatomic) ApplicationRouter * appRouter;
 
 @end
 
@@ -11,14 +12,13 @@
 #pragma mark - UIWindowSceneDelegate
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
-
-    WodListPresenter *presenter = [[WodListPresenter alloc] init];
-    WodListViewController *viewController = [[WodListViewController alloc] initWithPresenter:presenter];
-
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     self.window.windowScene = (UIWindowScene *)scene;
+
+    ApplicationComponent *applicationComponent = [[ApplicationComponent alloc] init];
+    self.appRouter = [[ApplicationRouter alloc] initWithWindow:self.window applicationComponent:applicationComponent];
+    [self.appRouter navigateToWodListViewController];
 }
 
 @end
