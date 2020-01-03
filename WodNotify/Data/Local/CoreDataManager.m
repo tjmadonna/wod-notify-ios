@@ -49,6 +49,7 @@
 
 - (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion {
     NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
+    backgroundContext.mergePolicy = NSOverwriteMergePolicy;
     [backgroundContext performBlock:^{
 
         for (WodModel *wodModel in wodModelArray) {
