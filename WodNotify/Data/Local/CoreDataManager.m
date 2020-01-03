@@ -47,6 +47,27 @@
     }];
 }
 
+- (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion {
+    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
+    [backgroundContext performBlock:^{
+
+        for (WodModel *wodModel in wodModelArray) {
+            WodLocalModel *wodLocalModel = [[WodLocalModel alloc] initWithContext:backgroundContext];
+            wodLocalModel.uid = wodModel.uid;
+            wodLocalModel.date = wodModel.date;
+            wodLocalModel.title = wodModel.title;
+            wodLocalModel.url = wodModel.url;
+            wodLocalModel.author = wodModel.author;
+            wodLocalModel.summary = wodModel.summary;
+        }
+
+        NSError *error;
+        [backgroundContext save:&error];
+
+        completion(error);
+    }];
+}
+
 - (NSArray<WodModel *> *)mapLocalWodModelArrayToWodModelArray:(NSArray<WodLocalModel *> *)localWodModelArray {
     NSMutableArray<WodModel *> *wodModelArray = [[NSMutableArray alloc] initWithCapacity:localWodModelArray.count];
 
