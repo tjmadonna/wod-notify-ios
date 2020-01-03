@@ -32,7 +32,6 @@
     [super viewDidLoad];
     [self setupTableView];
     [self.presenter setView:self];
-    self.view.backgroundColor = [UIColor purpleColor];
 }
 
 - (void)setupTableView {
