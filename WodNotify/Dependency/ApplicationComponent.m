@@ -28,7 +28,7 @@
 @synthesize syncDateManager = _syncDateManager;
 
 - (NSPersistentContainer *)persistentContainer {
-    if (_persistentContainer) {
+    if (!_persistentContainer) {
         _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
         [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull _,
                                                                           NSError * _Nullable error) {
@@ -42,21 +42,21 @@
 }
 
 - (NetworkDataManager *)networkDataManager {
-    if (_networkDataManager) {
+    if (!_networkDataManager) {
         _networkDataManager = [[NetworkDataManager alloc] init];
     }
     return _networkDataManager;
 }
 
 - (id<LocalDataManagerProtocol>)localDataManager {
-    if (_localDataManager) {
+    if (!_localDataManager) {
         _localDataManager = [[CoreDataManager alloc] initWithPersistentContainer:self.persistentContainer];
     }
     return _localDataManager;
 }
 
 - (id<SyncDataManagerProtocol>)syncDateManager {
-    if (_syncDateManager) {
+    if (!_syncDateManager) {
         _syncDateManager = [[SyncDataManager alloc] initWithLocalDataManager:self.localDataManager
                                                            remoteDataManager:self.networkDataManager];
     }
