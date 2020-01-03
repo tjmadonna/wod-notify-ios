@@ -39,7 +39,17 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
 }
 
 - (void)fetchWods {
-    [self.localDataManager getAllWodsWithCompletion:^(NSArray<WodModel *> * _Nullable wods, NSError * _Nullable error) {
+    [self.syncDataManager syncNewWodsWithCompletion:^(NSArray<WodModel *> * _Nullable newWods,
+                                                      NSError * _Nullable syncError) {
+        if (syncError) {
+            NSLog(@"Error Syncing Wods: %@", syncError);
+            return;
+        }
+        NSLog(@"Saved %lu wods to local data manager", newWods.count);
+    }];
+
+    [self.localDataManager getAllWodsWithCompletion:^(NSArray<WodModel *> * _Nullable wods,
+                                                      NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error Fetching Wods: %@", error);
             return;
