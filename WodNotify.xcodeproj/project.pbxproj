@@ -19,6 +19,9 @@
 		B4956B6423B2AFD5001C8391 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4956B6323B2AFD5001C8391 /* Assets.xcassets */; };
 		B4956B6723B2AFD5001C8391 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4956B6523B2AFD5001C8391 /* LaunchScreen.storyboard */; };
 		B4956B6A23B2AFD5001C8391 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B6923B2AFD5001C8391 /* main.m */; };
+		B4C70FF723BEABF50088FF15 /* NetworkDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C70FF423BEABF50088FF15 /* NetworkDataManager.m */; };
+		B4C7100B23BEBF3E0088FF15 /* SyncDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C7100A23BEBF3E0088FF15 /* SyncDataManager.m */; };
+		B4C7100F23BEC2090088FF15 /* WodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C7100E23BEC2090088FF15 /* WodModel.m */; };
 		B4FE9F0923B2CDE700788EEF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4FE9F0723B2CDE700788EEF /* Model.xcdatamodeld */; };
 		B4FE9F0F23B2CFB400788EEF /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4FE9F0E23B2CFB400788EEF /* CoreDataManager.m */; };
 /* End PBXBuildFile section */
@@ -47,6 +50,14 @@
 		B4956B6623B2AFD5001C8391 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4956B6823B2AFD5001C8391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4956B6923B2AFD5001C8391 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B4C70FEA23BEAB780088FF15 /* RemoteDataManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteDataManagerProtocol.h; sourceTree = "<group>"; };
+		B4C70FF323BEABF50088FF15 /* NetworkDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkDataManager.h; sourceTree = "<group>"; };
+		B4C70FF423BEABF50088FF15 /* NetworkDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkDataManager.m; sourceTree = "<group>"; };
+		B4C7100723BEBE2E0088FF15 /* SyncDataManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncDataManagerProtocol.h; sourceTree = "<group>"; };
+		B4C7100923BEBF3E0088FF15 /* SyncDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncDataManager.h; sourceTree = "<group>"; };
+		B4C7100A23BEBF3E0088FF15 /* SyncDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncDataManager.m; sourceTree = "<group>"; };
+		B4C7100D23BEC2090088FF15 /* WodModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodModel.h; sourceTree = "<group>"; };
+		B4C7100E23BEC2090088FF15 /* WodModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WodModel.m; sourceTree = "<group>"; };
 		B4FE9F0823B2CDE700788EEF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B4FE9F0D23B2CFB400788EEF /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		B4FE9F0E23B2CFB400788EEF /* CoreDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
@@ -214,11 +225,39 @@
 			path = Feature;
 			sourceTree = "<group>";
 		};
+		B4C70FF223BEABF50088FF15 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				B4C70FF323BEABF50088FF15 /* NetworkDataManager.h */,
+				B4C70FF423BEABF50088FF15 /* NetworkDataManager.m */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		B4C7100823BEBF190088FF15 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				B4C7100923BEBF3E0088FF15 /* SyncDataManager.h */,
+				B4C7100A23BEBF3E0088FF15 /* SyncDataManager.m */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		B4C7100C23BEC1820088FF15 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B4FE9F0723B2CDE700788EEF /* Model.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B4FE9F0523B2CDC000788EEF /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				B4FE9F0B23B2CEDC00788EEF /* DataManager */,
+				B4C7100823BEBF190088FF15 /* Sync */,
 				B4FE9F0A23B2CECB00788EEF /* Local */,
+				B4C70FF223BEABF50088FF15 /* Remote */,
 				B4FE9F0623B2CDCB00788EEF /* Model */,
 			);
 			path = Data;
@@ -227,7 +266,8 @@
 		B4FE9F0623B2CDCB00788EEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B4FE9F0723B2CDE700788EEF /* Model.xcdatamodeld */,
+				B4C7100D23BEC2090088FF15 /* WodModel.h */,
+				B4C7100E23BEC2090088FF15 /* WodModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +275,7 @@
 		B4FE9F0A23B2CECB00788EEF /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				B4C7100C23BEC1820088FF15 /* Model */,
 				B4FE9F0D23B2CFB400788EEF /* CoreDataManager.h */,
 				B4FE9F0E23B2CFB400788EEF /* CoreDataManager.m */,
 			);
@@ -245,6 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				B4FE9F1023B2D04A00788EEF /* LocalDataManagerProtocol.h */,
+				B4C70FEA23BEAB780088FF15 /* RemoteDataManagerProtocol.h */,
+				B4C7100723BEBE2E0088FF15 /* SyncDataManagerProtocol.h */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -321,10 +364,13 @@
 			files = (
 				B40D5B8323BC03A600E67BAB /* ApplicationRouter.m in Sources */,
 				B432E70423B2C2A30036AA04 /* WodListViewItem.m in Sources */,
+				B4C70FF723BEABF50088FF15 /* NetworkDataManager.m in Sources */,
 				B43B3FAB23BA903E00B43C57 /* WodItemCell.m in Sources */,
 				B432E70723B2C33E0036AA04 /* WodListPresenter.m in Sources */,
 				B4FE9F0F23B2CFB400788EEF /* CoreDataManager.m in Sources */,
+				B4C7100F23BEC2090088FF15 /* WodModel.m in Sources */,
 				B4FE9F0923B2CDE700788EEF /* Model.xcdatamodeld in Sources */,
+				B4C7100B23BEBF3E0088FF15 /* SyncDataManager.m in Sources */,
 				B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */,
 				B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */,
 				B4956B6A23B2AFD5001C8391 /* main.m in Sources */,
