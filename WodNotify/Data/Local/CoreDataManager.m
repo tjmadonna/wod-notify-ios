@@ -31,7 +31,7 @@
 
         NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
         fetchRequest.predicate = [NSPredicate predicateWithValue:YES];
-        fetchRequest.sortDescriptors = @[ [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES] ];
+        fetchRequest.sortDescriptors = @[ [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] ];
 
         NSError *error;
         NSArray<WodLocalModel *> *wods = [backgroundContext executeFetchRequest:fetchRequest error:&error];
