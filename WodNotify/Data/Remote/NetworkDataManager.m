@@ -10,8 +10,13 @@
 
 @implementation NetworkDataManager
 
+NSString * const kNetworkDataManagerDateFormat = @"MMddyyyy";
+
+NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com";
+
 - (void)getWodsWithCompletion:(WodRemoteCompletion)completion {
-    NSURL *url = [[NSURL alloc] initWithString:@"https://www.crossfitathletics.com/wods?format=json"];
+    NSString *urlString = [[NSString alloc] initWithFormat:@"%@/wods?format=json", kNetworkDataManagerBaseUrl];
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
 
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url
                                                          completionHandler:^(NSData * _Nullable data,
@@ -30,7 +35,7 @@
             return;
         }
 
-        completion(result, nil);
+        completion([self mapJsonToWodModelArray:result], nil);
     }];
 
     [task resume];
@@ -43,6 +48,38 @@
     if (error) { return nil; }
 
     return jsonDict[@"items"];
+}
+
+- (NSArray<WodModel *> *)mapJsonToWodModelArray:(NSArray<NSDictionary *> *)jsonDictArray {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = kNetworkDataManagerDateFormat;
+
+    NSMutableArray<WodModel *> *wodModelArray = [[NSMutableArray alloc] init];
+
+    for (NSDictionary *jsonDict in jsonDictArray) {
+        NSString *uid = jsonDict[@"id"];
+        NSString *title = jsonDict[@"title"];
+        NSString *author = jsonDict[@"author"][@"displayName"];
+        NSString *relativeUrl = jsonDict[@"fullUrl"];
+        NSString *summary = jsonDict[@"body"];
+
+        if (uid && title && author && relativeUrl && summary) {
+
+            NSDate *date = [dateFormatter dateFromString:title];
+            NSString *url = [[NSString alloc] initWithFormat:@"%@%@", kNetworkDataManagerBaseUrl, relativeUrl];
+
+            if (date && url) {
+                [wodModelArray addObject: [[WodModel alloc] initWithUid:uid
+                                                                   date:date
+                                                                  title:title
+                                                                 author:author
+                                                                    url:url
+                                                                summary:summary]];
+            }
+        }
+    }
+
+    return wodModelArray;
 }
 
 @end
