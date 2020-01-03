@@ -8,42 +8,59 @@
 
 #import "ApplicationComponent.h"
 #import <CoreData/CoreData.h>
+#import "CoreDataManager.h"
+#import "NetworkDataManager.h"
+#import "SyncDataManager.h"
 
 @interface ApplicationComponent ()
 
-@property (strong, atomic, readonly) NSPersistentContainer * _Nullable persistentContainer;
+@property (strong, atomic, readonly) NSPersistentContainer * _Nonnull persistentContainer;
+
+@property (strong, atomic, readonly) NetworkDataManager * _Nonnull networkDataManager;
 
 @end
 
 @implementation ApplicationComponent
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _persistentContainer = [self createPersistentContainer];
-        _localDataManager = [self createLocalDataManagerWithPersistentContainer:_persistentContainer];
+@synthesize persistentContainer = _persistentContainer;
+@synthesize networkDataManager = _networkDataManager;
+@synthesize localDataManager = _localDataManager;
+@synthesize syncDateManager = _syncDateManager;
+
+- (NSPersistentContainer *)persistentContainer {
+    if (_persistentContainer) {
+        _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
+        [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull _,
+                                                                          NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"NSPersistentContainer Error: %@", error);
+            }
+        }];
     }
-    return self;
+
+    return _persistentContainer;
 }
 
-- (NSPersistentContainer * _Nullable)createPersistentContainer {
-    __block BOOL loaded = NO;
-    NSPersistentContainer *persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
-    [persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * _Nonnull description, NSError * _Nullable error) {
-        if (!error) {
-            loaded = YES;
-        }
-    }];
-    if (loaded)
-        return persistentContainer;
-    else
-        return nil;
+- (NetworkDataManager *)networkDataManager {
+    if (_networkDataManager) {
+        _networkDataManager = [[NetworkDataManager alloc] init];
+    }
+    return _networkDataManager;
 }
 
-- (id<LocalDataManagerProtocol> _Nullable)createLocalDataManagerWithPersistentContainer:(NSPersistentContainer * _Nullable)persistentContainer {
-    if (!persistentContainer) { return nil; }
-    return [[CoreDataManager alloc] initWithPersistentContainer:persistentContainer];
+- (id<LocalDataManagerProtocol>)localDataManager {
+    if (_localDataManager) {
+        _localDataManager = [[CoreDataManager alloc] initWithPersistentContainer:self.persistentContainer];
+    }
+    return _localDataManager;
+}
+
+- (id<SyncDataManagerProtocol>)syncDateManager {
+    if (_syncDateManager) {
+        _syncDateManager = [[SyncDataManager alloc] initWithLocalDataManager:self.localDataManager
+                                                           remoteDataManager:self.networkDataManager];
+    }
+    return _syncDateManager;
 }
 
 @end

@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CoreDataManager.h"
+#import "LocalDataManagerProtocol.h"
+#import "SyncDataManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ApplicationComponent : NSObject
 
-@property (strong, atomic, readonly) id<LocalDataManagerProtocol> _Nullable localDataManager;
+@property (strong, atomic, readonly) id<LocalDataManagerProtocol> localDataManager;
+
+@property (strong, atomic, readonly) id<SyncDataManagerProtocol> syncDateManager;
 
 @end
 
