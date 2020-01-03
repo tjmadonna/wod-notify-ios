@@ -26,15 +26,15 @@
 }
 
 - (void)getAllWodsWithCompletion:(nonnull WodQueryCompletion)completion {
-    [self.persistentContainer.viewContext performBlock:^{
+    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
+    [backgroundContext performBlock:^{
 
         NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
         fetchRequest.predicate = [NSPredicate predicateWithValue:YES];
         fetchRequest.sortDescriptors = @[ [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES] ];
 
         NSError *error;
-        NSArray<WodLocalModel *> *wods = [self.persistentContainer.viewContext executeFetchRequest:fetchRequest
-                                                                                             error:&error];
+        NSArray<WodLocalModel *> *wods = [backgroundContext executeFetchRequest:fetchRequest error:&error];
 
         if (error) {
             completion(nil, error);
