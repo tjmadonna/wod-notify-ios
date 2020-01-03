@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WodEntity+CoreDataProperties.h"
+#import "WodModel.h"
 
 #ifndef LocalDataManager_h
 #define LocalDataManager_h
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^WodQueryCompletion)( NSArray<WodEntity *> * _Nullable , NSError * _Nullable );
+typedef void (^WodQueryCompletion)( NSArray<WodModel *> * _Nullable , NSError * _Nullable );
 
 @protocol LocalDataManagerProtocol <NSObject>
 
