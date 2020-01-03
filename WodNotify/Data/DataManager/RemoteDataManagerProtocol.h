@@ -6,13 +6,14 @@
 //  Copyright © 2019 Tyler Madonna. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+#import "WodModel.h"
 
 #ifndef RemoteDataManagerProtocol_h
 #define RemoteDataManagerProtocol_h
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^WodRemoteCompletion)( NSArray<NSDictionary *> * _Nullable , NSError * _Nullable );
+typedef void (^WodRemoteCompletion)( NSArray<WodModel *> * _Nullable , NSError * _Nullable );
 
 @protocol RemoteDataManagerProtocol <NSObject>
 
