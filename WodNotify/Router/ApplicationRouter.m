@@ -32,7 +32,9 @@
 
 - (void)navigateToWodListViewController {
     id<LocalDataManagerProtocol> localDataManager = self.applicationComponent.localDataManager;
-    WodListPresenter *presenter = [[WodListPresenter alloc] initWithLocalDataManager:localDataManager];
+    id<SyncDataManagerProtocol> syncDataManager = self.applicationComponent.syncDateManager;
+    WodListPresenter *presenter = [[WodListPresenter alloc] initWithLocalDataManager:localDataManager
+                                                                     syncDataManager:syncDataManager];
     WodListViewController *viewController = [[WodListViewController alloc] initWithPresenter:presenter];
 
     self.window.rootViewController =  [[UINavigationController alloc] initWithRootViewController: viewController];
