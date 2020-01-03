@@ -16,9 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^WodQueryCompletion)( NSArray<WodModel *> * _Nullable , NSError * _Nullable );
 
+typedef void (^WodSaveCompletion)( NSError * _Nullable );
+
 @protocol LocalDataManagerProtocol <NSObject>
 
 - (void)getAllWodsWithCompletion:(WodQueryCompletion)completion;
+
+- (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion;
 
 @end
 
