@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WodListContract.h"
 #import "LocalDataManagerProtocol.h"
+#import "SyncDataManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) id<WodListViewProtocol> view;
 
-- (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager;
+- (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
+                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager;
 
 @end
 

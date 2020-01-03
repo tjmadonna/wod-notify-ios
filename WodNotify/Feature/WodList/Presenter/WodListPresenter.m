@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) id<LocalDataManagerProtocol> localDataManager;
 
+@property (strong, nonatomic) id<SyncDataManagerProtocol> syncDataManager;
+
 @end
 
 @implementation WodListPresenter
@@ -20,10 +22,12 @@ NSString * const kDateDelimiter = @"-";
 
 NSString * const kDateFormat = @"MMMM-dd-EEEE";
 
-- (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager {
+- (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
+                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager {
     self = [super init];
     if (self) {
         _localDataManager = localDataManager;
+        _syncDataManager = syncDataManager;
     }
     return self;
 }
