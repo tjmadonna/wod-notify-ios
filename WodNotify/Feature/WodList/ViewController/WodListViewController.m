@@ -36,6 +36,8 @@
 }
 
 - (void)setupTableView {
+    self.tableView.rowHeight = 125;
+
     UINib *nib = [UINib nibWithNibName:kWodItemCellNibName bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:kWodItemCellCellId];
 }
