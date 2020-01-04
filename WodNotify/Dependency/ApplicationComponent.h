@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, atomic, readonly) id<SyncDataManagerProtocol> syncDateManager;
 
++ (ApplicationComponent *)shared;
+
 @end
 
 NS_ASSUME_NONNULL_END

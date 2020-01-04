@@ -27,6 +27,17 @@
 @synthesize localDataManager = _localDataManager;
 @synthesize syncDateManager = _syncDateManager;
 
++ (ApplicationComponent *)shared {
+    static dispatch_once_t pred;
+    static ApplicationComponent *shared = nil;
+
+    dispatch_once(&pred, ^{
+        shared = [[ApplicationComponent alloc] init];
+    });
+
+    return shared;
+}
+
 - (NSPersistentContainer *)persistentContainer {
     if (!_persistentContainer) {
         _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];

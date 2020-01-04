@@ -16,7 +16,7 @@
     [self.window makeKeyAndVisible];
     self.window.windowScene = (UIWindowScene *)scene;
 
-    ApplicationComponent *applicationComponent = [[ApplicationComponent alloc] init];
+    ApplicationComponent *applicationComponent = [ApplicationComponent shared];
     self.appRouter = [[ApplicationRouter alloc] initWithWindow:self.window applicationComponent:applicationComponent];
     [self.appRouter navigateToWodListViewController];
 }
