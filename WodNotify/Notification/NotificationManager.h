@@ -7,11 +7,11 @@
 //
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
-#import "NotificationCenterProtocol.h"
+#import "NotificationManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NotificationManager : NSObject <NotificationCenterProtocol>
+@interface NotificationManager : NSObject <NotificationManagerProtocol>
 
 - (instancetype)initWithUserNotificationCenter:(UNUserNotificationCenter *)userNotificationCenter;
 

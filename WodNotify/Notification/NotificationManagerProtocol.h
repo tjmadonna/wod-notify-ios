@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol NotificationCenterProtocol <NSObject>
+@protocol NotificationManagerProtocol <NSObject>
 
 - (void)requestPermissions;
 

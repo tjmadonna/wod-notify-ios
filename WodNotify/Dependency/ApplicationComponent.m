@@ -76,7 +76,7 @@
     return _syncDateManager;
 }
 
-- (id<NotificationCenterProtocol>)notificationManager {
+- (id<NotificationManagerProtocol>)notificationManager {
     if (!_notificationManager) {
         _notificationManager = [[NotificationManager alloc]
                                 initWithUserNotificationCenter:[UNUserNotificationCenter currentNotificationCenter]];
