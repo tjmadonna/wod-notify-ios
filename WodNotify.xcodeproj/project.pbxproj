@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B40D5B8323BC03A600E67BAB /* ApplicationRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B40D5B8223BC03A600E67BAB /* ApplicationRouter.m */; };
+		B41F2A3623C14A940013B66F /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B41F2A3523C14A940013B66F /* BackgroundTaskManager.m */; };
 		B432E70423B2C2A30036AA04 /* WodListViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70323B2C2A30036AA04 /* WodListViewItem.m */; };
 		B432E70723B2C33E0036AA04 /* WodListPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70623B2C33E0036AA04 /* WodListPresenter.m */; };
 		B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70923B2C9040036AA04 /* WodListViewController.m */; };
 		B43B3FAB23BA903E00B43C57 /* WodItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B43B3FA923BA903E00B43C57 /* WodItemCell.m */; };
 		B43B3FAC23BA903E00B43C57 /* WodItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43B3FAA23BA903E00B43C57 /* WodItemCell.xib */; };
 		B44D9D3423B7E16A007A4EC5 /* ApplicationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B44D9D3323B7E16A007A4EC5 /* ApplicationComponent.m */; };
+		B480559723C01F1500E27CAF /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B480559623C01F1500E27CAF /* NotificationManager.m */; };
 		B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5823B2AFD3001C8391 /* AppDelegate.m */; };
 		B4956B5C23B2AFD3001C8391 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5B23B2AFD3001C8391 /* SceneDelegate.m */; };
 		B4956B6423B2AFD5001C8391 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4956B6323B2AFD5001C8391 /* Assets.xcassets */; };
@@ -29,6 +31,10 @@
 /* Begin PBXFileReference section */
 		B40D5B8123BC03A600E67BAB /* ApplicationRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationRouter.h; sourceTree = "<group>"; };
 		B40D5B8223BC03A600E67BAB /* ApplicationRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationRouter.m; sourceTree = "<group>"; };
+		B41F2A3123C147820013B66F /* NotificationManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationManagerProtocol.h; sourceTree = "<group>"; };
+		B41F2A3323C14A150013B66F /* BackgroundTaskManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManagerProtocol.h; sourceTree = "<group>"; };
+		B41F2A3423C14A940013B66F /* BackgroundTaskManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		B41F2A3523C14A940013B66F /* BackgroundTaskManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 		B432E6FE23B2BAF70036AA04 /* WodListContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodListContract.h; sourceTree = "<group>"; };
 		B432E70223B2C2A30036AA04 /* WodListViewItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodListViewItem.h; sourceTree = "<group>"; };
 		B432E70323B2C2A30036AA04 /* WodListViewItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WodListViewItem.m; sourceTree = "<group>"; };
@@ -41,6 +47,8 @@
 		B43B3FAA23BA903E00B43C57 /* WodItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WodItemCell.xib; sourceTree = "<group>"; };
 		B44D9D3223B7E16A007A4EC5 /* ApplicationComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationComponent.h; sourceTree = "<group>"; };
 		B44D9D3323B7E16A007A4EC5 /* ApplicationComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationComponent.m; sourceTree = "<group>"; };
+		B480559523C01F1500E27CAF /* NotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
+		B480559623C01F1500E27CAF /* NotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		B4956B5423B2AFD3001C8391 /* WodNotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WodNotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4956B5723B2AFD3001C8391 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B4956B5823B2AFD3001C8391 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B41F2A3223C149E40013B66F /* BackgroundTask */ = {
+			isa = PBXGroup;
+			children = (
+				B41F2A3323C14A150013B66F /* BackgroundTaskManagerProtocol.h */,
+				B41F2A3423C14A940013B66F /* BackgroundTaskManager.h */,
+				B41F2A3523C14A940013B66F /* BackgroundTaskManager.m */,
+			);
+			path = BackgroundTask;
+			sourceTree = "<group>";
+		};
 		B432E6F423B2B2980036AA04 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +160,16 @@
 			path = Dependency;
 			sourceTree = "<group>";
 		};
+		B480559423C01EF400E27CAF /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				B41F2A3123C147820013B66F /* NotificationManagerProtocol.h */,
+				B480559523C01F1500E27CAF /* NotificationManager.h */,
+				B480559623C01F1500E27CAF /* NotificationManager.m */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		B4956B4B23B2AFD3001C8391 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +193,8 @@
 				B4956B7423B2B159001C8391 /* Scene */,
 				B44D9D3123B7E136007A4EC5 /* Dependency */,
 				B432E6F423B2B2980036AA04 /* Router */,
+				B41F2A3223C149E40013B66F /* BackgroundTask */,
+				B480559423C01EF400E27CAF /* Notification */,
 				B4956B7523B2B160001C8391 /* Feature */,
 				B4FE9F0523B2CDC000788EEF /* Data */,
 				B4956B7223B2B145001C8391 /* Resource */,
@@ -362,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B41F2A3623C14A940013B66F /* BackgroundTaskManager.m in Sources */,
 				B40D5B8323BC03A600E67BAB /* ApplicationRouter.m in Sources */,
 				B432E70423B2C2A30036AA04 /* WodListViewItem.m in Sources */,
 				B4C70FF723BEABF50088FF15 /* NetworkDataManager.m in Sources */,
@@ -371,6 +402,7 @@
 				B4C7100F23BEC2090088FF15 /* WodModel.m in Sources */,
 				B4FE9F0923B2CDE700788EEF /* Model.xcdatamodeld in Sources */,
 				B4C7100B23BEBF3E0088FF15 /* SyncDataManager.m in Sources */,
+				B480559723C01F1500E27CAF /* NotificationManager.m in Sources */,
 				B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */,
 				B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */,
 				B4956B6A23B2AFD5001C8391 /* main.m in Sources */,
