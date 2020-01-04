@@ -10,6 +10,7 @@
 #import "LocalDataManagerProtocol.h"
 #import "SyncDataManagerProtocol.h"
 #import "NotificationManagerProtocol.h"
+#import "BackgroundTaskManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, atomic, readonly) id<SyncDataManagerProtocol> syncDateManager;
 
 @property (strong, atomic, readonly) id<NotificationManagerProtocol> notificationManager;
+
+@property (strong, atomic, readonly) id<BackgroundTaskManagerProtocol> backgroundTaskManager;
 
 + (ApplicationComponent *)sharedComponent;
 

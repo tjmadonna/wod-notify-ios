@@ -12,6 +12,7 @@
 #import "NetworkDataManager.h"
 #import "SyncDataManager.h"
 #import "NotificationManager.h"
+#import "BackgroundTaskManager.h"
 
 @interface ApplicationComponent ()
 
@@ -28,6 +29,7 @@
 @synthesize localDataManager = _localDataManager;
 @synthesize syncDateManager = _syncDateManager;
 @synthesize notificationManager = _notificationManager;
+@synthesize backgroundTaskManager = _backgroundTaskManager;
 
 + (ApplicationComponent *)sharedComponent {
     static dispatch_once_t pred;
@@ -82,6 +84,15 @@
                                 initWithUserNotificationCenter:[UNUserNotificationCenter currentNotificationCenter]];
     }
     return _notificationManager;
+}
+
+- (id<BackgroundTaskManagerProtocol>)backgroundTaskManager {
+    if (!_backgroundTaskManager) {
+        _backgroundTaskManager = [[BackgroundTaskManager alloc] initWithTaskScheduler:[BGTaskScheduler sharedScheduler]
+                                                                      syncDataManager:self.syncDateManager
+                                                                  notificationManager:self.notificationManager];
+    }
+    return _backgroundTaskManager;
 }
 
 @end
