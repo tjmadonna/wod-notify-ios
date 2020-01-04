@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LocalDataManagerProtocol.h"
 #import "SyncDataManagerProtocol.h"
+#import "NotificationCenterProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, atomic, readonly) id<SyncDataManagerProtocol> syncDateManager;
 
-+ (ApplicationComponent *)shared;
+@property (strong, atomic, readonly) id<NotificationCenterProtocol> notificationManager;
+
++ (ApplicationComponent *)sharedComponent;
 
 @end
 

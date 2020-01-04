@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "NetworkDataManager.h"
 #import "SyncDataManager.h"
+#import "NotificationManager.h"
 
 @interface ApplicationComponent ()
 
@@ -26,8 +27,9 @@
 @synthesize networkDataManager = _networkDataManager;
 @synthesize localDataManager = _localDataManager;
 @synthesize syncDateManager = _syncDateManager;
+@synthesize notificationManager = _notificationManager;
 
-+ (ApplicationComponent *)shared {
++ (ApplicationComponent *)sharedComponent {
     static dispatch_once_t pred;
     static ApplicationComponent *shared = nil;
 
@@ -72,6 +74,14 @@
                                                            remoteDataManager:self.networkDataManager];
     }
     return _syncDateManager;
+}
+
+- (id<NotificationCenterProtocol>)notificationManager {
+    if (!_notificationManager) {
+        _notificationManager = [[NotificationManager alloc]
+                                initWithUserNotificationCenter:[UNUserNotificationCenter currentNotificationCenter]];
+    }
+    return _notificationManager;
 }
 
 @end
