@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Wod Notify";
     [self setupTableView];
     [self.presenter setView:self];
 }
