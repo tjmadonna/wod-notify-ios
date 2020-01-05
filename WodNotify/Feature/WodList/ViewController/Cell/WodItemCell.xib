@@ -51,6 +51,11 @@
                             <constraint firstItem="oMS-zs-EIH" firstAttribute="leading" secondItem="O7c-YU-T7w" secondAttribute="leading" constant="8" id="dqU-bJ-qaq"/>
                             <constraint firstAttribute="bottom" secondItem="oMS-zs-EIH" secondAttribute="bottom" constant="8" id="sx7-B4-hWh"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBO-9E-NxN">
                         <rect key="frame" x="145" y="62" width="364" height="1"/>
