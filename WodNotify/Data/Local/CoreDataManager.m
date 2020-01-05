@@ -13,16 +13,35 @@
 
 @property (strong, nonatomic) NSPersistentContainer * persistentContainer;
 
+@property (strong, nonatomic) NSNotificationCenter * notificationCenter;
+
 @end
 
 @implementation CoreDataManager
 
-- (instancetype)initWithPersistentContainer:(NSPersistentContainer *)persistentContainer {
+NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataManagerWodModelDataChangedNotification";
+
+- (instancetype)initWithPersistentContainer:(NSPersistentContainer *)persistentContainer
+                         notificationCenter:(NSNotificationCenter *)notificationCenter {
     self = [super init];
     if (self) {
         _persistentContainer = persistentContainer;
+        _notificationCenter = notificationCenter;
+        [self registerNotification];
     }
     return self;
+}
+
+- (void)registerNotification {
+    [self.notificationCenter addObserver:self
+                                selector:@selector(wodDataDidChangeForNotification:)
+                                    name:NSManagedObjectContextDidSaveNotification
+                                  object:nil];
+}
+
+- (void)wodDataDidChangeForNotification:(NSNotification *)notification {
+    NSLog(@"wodDataDidChangeForNotification");
+    [self.notificationCenter postNotificationName:kLocalDataManagerWodModelDataChangedNotification object:nil];
 }
 
 - (void)getAllWodsWithCompletion:(nonnull WodQueryCompletion)completion {

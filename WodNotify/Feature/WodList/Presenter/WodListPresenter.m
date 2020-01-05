@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) id<SyncDataManagerProtocol> syncDataManager;
 
+@property (strong, nonatomic) NSNotificationCenter * notificationCenter;
+
 @end
 
 @implementation WodListPresenter
@@ -23,13 +25,23 @@ NSString * const kDateDelimiter = @"-";
 NSString * const kDateFormat = @"MMMM-dd-EEEE";
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
-                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager {
+                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager
+                      notificationCenter:(NSNotificationCenter *)notificationCenter {
     self = [super init];
     if (self) {
         _localDataManager = localDataManager;
         _syncDataManager = syncDataManager;
+        _notificationCenter = notificationCenter;
+        [self registerWodModelDataChangeNotification];
     }
     return self;
+}
+
+- (void)registerWodModelDataChangeNotification {
+    [self.notificationCenter addObserver:self
+                                selector:@selector(fetchWodsFromLocalDataManager)
+                                    name:kLocalDataManagerWodModelDataChangedNotification
+                                  object:nil];
 }
 
 - (void)setView:(id<WodListViewProtocol>)view {
@@ -48,6 +60,11 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
         NSLog(@"Saved %lu wods to local data manager", newWods.count);
     }];
 
+    [self fetchWodsFromLocalDataManager];
+}
+
+- (void)fetchWodsFromLocalDataManager {
+    NSLog(@"fetchWodsFromLocalDataManager");
     [self.localDataManager getAllWodsWithCompletion:^(NSArray<WodModel *> * _Nullable wods,
                                                       NSError * _Nullable error) {
         if (error) {

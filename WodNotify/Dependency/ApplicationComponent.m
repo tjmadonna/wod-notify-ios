@@ -65,7 +65,8 @@
 
 - (id<LocalDataManagerProtocol>)localDataManager {
     if (!_localDataManager) {
-        _localDataManager = [[CoreDataManager alloc] initWithPersistentContainer:self.persistentContainer];
+        _localDataManager = [[CoreDataManager alloc] initWithPersistentContainer:self.persistentContainer
+                                                              notificationCenter:self.notificationCenter];
     }
     return _localDataManager;
 }
@@ -93,6 +94,10 @@
                                                                   notificationManager:self.notificationManager];
     }
     return _backgroundTaskManager;
+}
+
+- (NSNotificationCenter *)notificationCenter {
+    return [NSNotificationCenter defaultCenter];
 }
 
 @end

@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CoreDataManager : NSObject <LocalDataManagerProtocol>
 
-- (instancetype)initWithPersistentContainer:(NSPersistentContainer *)persistentContainer;
+- (instancetype)initWithPersistentContainer:(NSPersistentContainer *)persistentContainer
+                         notificationCenter:(NSNotificationCenter *)notificationCenter;
 
 @end
 

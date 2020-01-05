@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) id<WodListViewProtocol> view;
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
-                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager;
+                         syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager
+                      notificationCenter:(NSNotificationCenter *)notificationCenter;
 
 @end
 

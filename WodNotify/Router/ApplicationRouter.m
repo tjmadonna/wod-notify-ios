@@ -34,7 +34,8 @@
     id<LocalDataManagerProtocol> localDataManager = self.applicationComponent.localDataManager;
     id<SyncDataManagerProtocol> syncDataManager = self.applicationComponent.syncDateManager;
     WodListPresenter *presenter = [[WodListPresenter alloc] initWithLocalDataManager:localDataManager
-                                                                     syncDataManager:syncDataManager];
+                                                                     syncDataManager:syncDataManager
+                                                                  notificationCenter: self.applicationComponent.notificationCenter];
     WodListViewController *viewController = [[WodListViewController alloc] initWithPresenter:presenter];
 
     self.window.rootViewController =  [[UINavigationController alloc] initWithRootViewController: viewController];

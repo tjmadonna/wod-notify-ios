@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, atomic, readonly) id<BackgroundTaskManagerProtocol> backgroundTaskManager;
 
+@property (strong, atomic, readonly) NSNotificationCenter * notificationCenter;
+
 + (ApplicationComponent *)sharedComponent;
 
 @end

@@ -18,6 +18,8 @@ typedef void (^WodQueryCompletion)( NSArray<WodModel *> * _Nullable , NSError * 
 
 typedef void (^WodSaveCompletion)( NSError * _Nullable );
 
+FOUNDATION_EXPORT NSString *const kLocalDataManagerWodModelDataChangedNotification;
+
 @protocol LocalDataManagerProtocol <NSObject>
 
 - (void)getAllWodsWithCompletion:(WodQueryCompletion)completion;
