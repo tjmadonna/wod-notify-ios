@@ -42,6 +42,9 @@ NSString *const kWodItemCellNibName = @"WodItemCell";
 - (void)setWodItem:(WodListViewItem *)wodListItem {
     self.titleLabel.text = wodListItem.title;
     self.authorLabel.text = wodListItem.author;
+    self.monthLabel.text = wodListItem.month;
+    self.dayOfMonthLabel.text = wodListItem.dayOfMonth;
+    self.dayOfWeekLabel.text = wodListItem.dayOfWeek;
 }
 
 @end
