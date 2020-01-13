@@ -17,6 +17,8 @@ typedef void (^NewWodCompletion)( NSArray<WodModel *> * _Nullable , NSError * _N
 
 @protocol SyncDataManagerProtocol <NSObject>
 
+- (BOOL)needsSynced;
+
 - (void)syncNewWodsWithCompletion:(NewWodCompletion)completion;
 
 @end

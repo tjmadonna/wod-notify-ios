@@ -20,6 +20,10 @@
 
 @implementation SyncDataManager
 
+NSString *const kUserDefaultsLastSyncKey = @"kUserDefaultsLastSyncKey";
+
+int const kOneHourTimeInterval = 60 * 60;
+
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
                        remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager
                             userDefaults:(NSUserDefaults *)userDefaults {
@@ -30,6 +34,16 @@
         _userDefaults = userDefaults;
     }
     return self;
+}
+
+- (BOOL)needsSynced {
+    NSDate *lastSyncTime = [self.userDefaults objectForKey:kUserDefaultsLastSyncKey];
+    if (lastSyncTime) {
+        NSDate *currentTime = [[NSDate alloc] init];
+        return [currentTime timeIntervalSinceDate:lastSyncTime] >= kOneHourTimeInterval;
+    } else {
+        return true;
+    }
 }
 
 - (void)syncNewWodsWithCompletion:(nonnull NewWodCompletion)completion {
@@ -68,6 +82,9 @@
                     completion(nil, saveWodsError);
                     return;
                 }
+
+                // Save sync time
+                [self.userDefaults setObject:[[NSDate alloc] init] forKey:kUserDefaultsLastSyncKey];
 
                 // Return wods
                 completion(newWodModels, nil);
