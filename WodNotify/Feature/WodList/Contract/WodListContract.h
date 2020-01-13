@@ -27,6 +27,8 @@
 
 - (void)setView:(id<WodListViewProtocol>)view;
 
+- (void)handleWodListViewItemSelection:(WodListViewItem *)item;
+
 @end
 
 #endif /* WodListContract_h */

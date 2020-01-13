@@ -35,7 +35,7 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
         _localDataManager = localDataManager;
         _syncDataManager = syncDataManager;
         _notificationCenter = notificationCenter;
-        router = router;
+        _router = router;
         [self registerWodModelDataChangeNotification];
     }
     return self;
@@ -52,6 +52,25 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
     _view = view;
     [self fetchWods];
     NSLog(@"View set on presenter");
+}
+
+- (void)handleWodListViewItemSelection:(WodListViewItem *)item {
+    [self.localDataManager getWodByUid:item.uid completion:^(WodModel * _Nullable wod, NSError * _Nullable error) {
+
+        if (error) {
+            NSLog(@"Error Fetching Wods: %@", error);
+            return;
+        }
+
+        if (!wod) {
+            NSLog(@"LocalDataManager getWodByUid returned a nil wod result");
+            return;
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.router navigateToWodDetailViewController:wod];
+        });
+    }];
 }
 
 - (void)fetchWods {
