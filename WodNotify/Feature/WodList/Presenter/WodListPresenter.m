@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic) NSNotificationCenter * notificationCenter;
 
+@property (weak, nonatomic) ApplicationRouter * router;
+
 @end
 
 @implementation WodListPresenter
@@ -26,12 +28,14 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
                          syncDataManager:(id<SyncDataManagerProtocol>)syncDataManager
-                      notificationCenter:(NSNotificationCenter *)notificationCenter {
+                      notificationCenter:(NSNotificationCenter *)notificationCenter
+                                  router:(ApplicationRouter *)router {
     self = [super init];
     if (self) {
         _localDataManager = localDataManager;
         _syncDataManager = syncDataManager;
         _notificationCenter = notificationCenter;
+        router = router;
         [self registerWodModelDataChangeNotification];
     }
     return self;
