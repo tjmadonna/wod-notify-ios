@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^WodQueryCompletion)( NSArray<WodModel *> * _Nullable , NSError * _Nullable );
 
+typedef void (^WodSingleWodQueryCompletion)( WodModel * _Nullable , NSError * _Nullable );
+
 typedef void (^WodSaveCompletion)( NSError * _Nullable );
 
 FOUNDATION_EXPORT NSString *const kLocalDataManagerWodModelDataChangedNotification;
@@ -23,6 +25,8 @@ FOUNDATION_EXPORT NSString *const kLocalDataManagerWodModelDataChangedNotificati
 @protocol LocalDataManagerProtocol <NSObject>
 
 - (void)getAllWodsWithCompletion:(WodQueryCompletion)completion;
+
+- (void)getWodByUid:(NSString *)uid completion:(WodSingleWodQueryCompletion)completion;
 
 - (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion;
 

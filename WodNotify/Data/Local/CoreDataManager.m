@@ -66,6 +66,28 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
     }];
 }
 
+- (void)getWodByUid:(NSString *)uid completion:(WodSingleWodQueryCompletion)completion {
+    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
+    [backgroundContext performBlock:^{
+
+        NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
+        fetchRequest.fetchLimit = 1;
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"uid", uid];
+
+        NSError *error;
+        NSArray<WodLocalModel *> *wods = [backgroundContext executeFetchRequest:fetchRequest error:&error];
+
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        NSArray<WodModel *> *wodModels = [self mapLocalWodModelArrayToWodModelArray:wods];
+
+        completion(wodModels.firstObject, nil);
+    }];
+}
+
 - (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion {
     NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
     backgroundContext.mergePolicy = NSOverwriteMergePolicy;
