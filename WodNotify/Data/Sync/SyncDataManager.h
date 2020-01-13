@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SyncDataManager : NSObject <SyncDataManagerProtocol>
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
-                       remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager;
+                       remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager
+                            userDefaults:(NSUserDefaults *)userDefaults;
 
 @end
 

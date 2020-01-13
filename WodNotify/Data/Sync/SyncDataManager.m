@@ -14,16 +14,20 @@
 
 @property (strong, nonatomic) id<RemoteDataManagerProtocol> remoteDataManager;
 
+@property (strong, nonatomic) NSUserDefaults * userDefaults;
+
 @end
 
 @implementation SyncDataManager
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
-                       remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager {
+                       remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager
+                            userDefaults:(NSUserDefaults *)userDefaults {
     self = [super init];
     if (self) {
         _localDataManager = localDataManager;
         _remoteDataManager = remoteDataManager;
+        _userDefaults = userDefaults;
     }
     return self;
 }

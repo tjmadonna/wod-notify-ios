@@ -74,7 +74,8 @@
 - (id<SyncDataManagerProtocol>)syncDateManager {
     if (!_syncDateManager) {
         _syncDateManager = [[SyncDataManager alloc] initWithLocalDataManager:self.localDataManager
-                                                           remoteDataManager:self.networkDataManager];
+                                                           remoteDataManager:self.networkDataManager
+                                                                userDefaults: [NSUserDefaults standardUserDefaults]];
     }
     return _syncDateManager;
 }
