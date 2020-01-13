@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)navigateToWodListViewController;
 
+- (void)navigateToWodDetailViewController:(WodModel *)wodModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

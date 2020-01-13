@@ -9,12 +9,15 @@
 #import "ApplicationRouter.h"
 #import "WodListPresenter.h"
 #import "WodListViewController.h"
+#import <SafariServices/SafariServices.h>
 
 @interface ApplicationRouter ()
 
 @property (strong, nonatomic) UIWindow * window;
 
 @property (strong, nonatomic) ApplicationComponent * applicationComponent;
+
+@property (strong, nonatomic) UINavigationController * navigationController;
 
 @end
 
@@ -39,7 +42,18 @@
                                                                               router: self];
     WodListViewController *viewController = [[WodListViewController alloc] initWithPresenter:presenter];
 
-    self.window.rootViewController =  [[UINavigationController alloc] initWithRootViewController: viewController];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController: viewController];
+    self.window.rootViewController =  self.navigationController;
+}
+
+- (void)navigateToWodDetailViewController:(WodModel *)wodModel {
+    NSURL *url = [[NSURL alloc] initWithString:wodModel.url];
+    if (url) {
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:url];
+        [self.navigationController presentViewController:safariViewController animated:YES completion:nil];
+    } else {
+        NSLog(@"Couldn't present detail view controller: WodModel url was nil");
+    }
 }
 
 @end
