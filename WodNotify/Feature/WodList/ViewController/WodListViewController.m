@@ -59,6 +59,13 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WodListViewItem *item = self.wodItems[indexPath.item];
+    [self.presenter handleWodListViewItemSelection:item];
+}
+
 #pragma mark - WodListView
 
 - (void)presentWodList:(NSArray<WodListViewItem *> *)wodList {
