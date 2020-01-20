@@ -27,6 +27,8 @@
 
 - (void)setView:(id<WodListViewProtocol>)view;
 
+- (void)loadData;
+
 - (void)handleWodListViewItemSelection:(WodListViewItem *)item;
 
 @end

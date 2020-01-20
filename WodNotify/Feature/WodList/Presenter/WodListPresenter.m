@@ -74,23 +74,22 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
 }
 
 - (void)fetchWods {
+    NSLog(@"Fetching wods from local data");
+    [self fetchWodsFromLocalDataManager];
+}
 
+- (void)loadData {
     if ([self.syncDataManager needsSynced]) {
-        // Sync Wods and then fetch
+        // Sync remote wods to the local data manager
+        NSLog(@"Syncing wods to local data");
         [self.syncDataManager syncNewWodsWithCompletion:^(NSArray<WodModel *> * _Nullable newWods,
                                                           NSError * _Nullable syncError) {
             if (syncError) {
                 NSLog(@"Error Syncing Wods: %@", syncError);
             } else {
-                NSLog(@"Saved %lu wods to local data manager", newWods.count);
+                NSLog(@"%lu new wods saved to local data", newWods.count);
             }
-
-            [self fetchWodsFromLocalDataManager];
         }];
-    } else {
-        // Just fetch wods
-        NSLog(@"Just fetching wods");
-        [self fetchWodsFromLocalDataManager];
     }
 }
 

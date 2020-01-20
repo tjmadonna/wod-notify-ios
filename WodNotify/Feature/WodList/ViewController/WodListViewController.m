@@ -35,6 +35,11 @@
     [self.presenter setView:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.presenter loadData];
+}
+
 - (void)setupTableView {
     self.tableView.rowHeight = 125;
 
