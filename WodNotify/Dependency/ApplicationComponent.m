@@ -58,7 +58,7 @@
 
 - (NetworkDataManager *)networkDataManager {
     if (!_networkDataManager) {
-        _networkDataManager = [[NetworkDataManager alloc] init];
+        _networkDataManager = [[NetworkDataManager alloc] initWithURLSession:[NSURLSession sharedSession]];
     }
     return _networkDataManager;
 }

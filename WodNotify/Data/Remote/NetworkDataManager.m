@@ -8,11 +8,25 @@
 
 #import "NetworkDataManager.h"
 
+@interface NetworkDataManager ()
+
+@property (strong, nonatomic) NSURLSession * urlSession;
+
+@end
+
 @implementation NetworkDataManager
 
 NSString * const kNetworkDataManagerDateFormat = @"MMddyyyy";
 
 NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com";
+
+- (instancetype)initWithURLSession:(NSURLSession *)urlSession {
+    self = [super init];
+    if (self) {
+        _urlSession = urlSession;
+    }
+    return self;
+}
 
 - (void)getWodsWithCompletion:(WodRemoteCompletion)completion {
     NSString *urlString = [[NSString alloc] initWithFormat:@"%@/wods?format=json", kNetworkDataManagerBaseUrl];
@@ -22,11 +36,10 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
                                                   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                               timeoutInterval:15];
 
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionTask *task = [session dataTaskWithRequest:request
-                                    completionHandler:^(NSData * _Nullable data,
-                                                        NSURLResponse * _Nullable response,
-                                                        NSError * _Nullable error) {
+    NSURLSessionTask *task = [self.urlSession dataTaskWithRequest:request
+                                                completionHandler:^(NSData * _Nullable data,
+                                                                    NSURLResponse * _Nullable response,
+                                                                    NSError * _Nullable error) {
         if (error) {
             completion(nil, error);
             return;

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NetworkDataManager : NSObject <RemoteDataManagerProtocol>
 
+- (instancetype)initWithURLSession:(NSURLSession *)urlSession;
+
 @end
 
 NS_ASSUME_NONNULL_END
