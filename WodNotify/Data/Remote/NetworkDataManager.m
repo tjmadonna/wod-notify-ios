@@ -18,10 +18,15 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
     NSString *urlString = [[NSString alloc] initWithFormat:@"%@/wods?format=json", kNetworkDataManagerBaseUrl];
     NSURL *url = [[NSURL alloc] initWithString:urlString];
 
-    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url
-                                                         completionHandler:^(NSData * _Nullable data,
-                                                                             NSURLResponse * _Nullable response,
-                                                                             NSError * _Nullable error) {
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url
+                                                  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                              timeoutInterval:15];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                    completionHandler:^(NSData * _Nullable data,
+                                                        NSURLResponse * _Nullable response,
+                                                        NSError * _Nullable error) {
         if (error) {
             completion(nil, error);
             return;
