@@ -11,7 +11,7 @@
 
 @interface CoreDataManager ()
 
-@property (strong, nonatomic) NSPersistentContainer * persistentContainer;
+@property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
 
 @property (strong, nonatomic) NSNotificationCenter * notificationCenter;
 
@@ -21,12 +21,13 @@
 
 NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataManagerWodModelDataChangedNotification";
 
-- (instancetype)initWithPersistentContainer:(NSPersistentContainer *)persistentContainer
-                         notificationCenter:(NSNotificationCenter *)notificationCenter {
+- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                          notificationCenter:(NSNotificationCenter *)notificationCenter {
     self = [super init];
     if (self) {
-        _persistentContainer = persistentContainer;
+        _managedObjectContext = managedObjectContext;
         _notificationCenter = notificationCenter;
+        _managedObjectContext.mergePolicy = NSOverwriteMergePolicy;
         [self registerNotification];
     }
     return self;
@@ -45,15 +46,14 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
 }
 
 - (void)getAllWodsWithCompletion:(nonnull WodQueryCompletion)completion {
-    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
-    [backgroundContext performBlock:^{
+    [self.managedObjectContext performBlock:^{
 
         NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
         fetchRequest.predicate = [NSPredicate predicateWithValue:YES];
         fetchRequest.sortDescriptors = @[ [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] ];
 
         NSError *error;
-        NSArray<WodLocalModel *> *wods = [backgroundContext executeFetchRequest:fetchRequest error:&error];
+        NSArray<WodLocalModel *> *wods = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 
         if (error) {
             completion(nil, error);
@@ -67,15 +67,14 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
 }
 
 - (void)getWodByUid:(NSString *)uid completion:(WodSingleWodQueryCompletion)completion {
-    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
-    [backgroundContext performBlock:^{
+    [self.managedObjectContext performBlock:^{
 
         NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
         fetchRequest.fetchLimit = 1;
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"uid", uid];
 
         NSError *error;
-        NSArray<WodLocalModel *> *wods = [backgroundContext executeFetchRequest:fetchRequest error:&error];
+        NSArray<WodLocalModel *> *wods = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 
         if (error) {
             completion(nil, error);
@@ -89,12 +88,10 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
 }
 
 - (void)saveWods:(NSArray<WodModel *> *)wodModelArray withCompletion:(WodSaveCompletion)completion {
-    NSManagedObjectContext *backgroundContext = [self.persistentContainer newBackgroundContext];
-    backgroundContext.mergePolicy = NSOverwriteMergePolicy;
-    [backgroundContext performBlock:^{
+    [self.managedObjectContext performBlock:^{
 
         for (WodModel *wodModel in wodModelArray) {
-            WodLocalModel *wodLocalModel = [[WodLocalModel alloc] initWithContext:backgroundContext];
+            WodLocalModel *wodLocalModel = [[WodLocalModel alloc] initWithContext:self.managedObjectContext];
             wodLocalModel.uid = wodModel.uid;
             wodLocalModel.date = wodModel.date;
             wodLocalModel.title = wodModel.title;
@@ -104,7 +101,7 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
         }
 
         NSError *error;
-        [backgroundContext save:&error];
+        [self.managedObjectContext save:&error];
 
         completion(error);
     }];

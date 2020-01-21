@@ -65,8 +65,8 @@
 
 - (id<LocalDataManagerProtocol>)localDataManager {
     if (!_localDataManager) {
-        _localDataManager = [[CoreDataManager alloc] initWithPersistentContainer:self.persistentContainer
-                                                              notificationCenter:self.notificationCenter];
+        _localDataManager = [[CoreDataManager alloc] initWithManagedObjectContext:[self.persistentContainer newBackgroundContext]
+                                                               notificationCenter:self.notificationCenter];
     }
     return _localDataManager;
 }
