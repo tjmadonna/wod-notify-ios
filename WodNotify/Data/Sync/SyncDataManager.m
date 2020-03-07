@@ -22,7 +22,7 @@
 
 NSString *const kUserDefaultsLastSyncKey = @"kUserDefaultsLastSyncKey";
 
-int const kOneHourTimeInterval = 60 * 60;
+int const kFifteenMinuteTimeInterval = 15 * 60;
 
 - (instancetype)initWithLocalDataManager:(id<LocalDataManagerProtocol>)localDataManager
                        remoteDataManager:(id<RemoteDataManagerProtocol>)remoteDataManager
@@ -40,7 +40,7 @@ int const kOneHourTimeInterval = 60 * 60;
     NSDate *lastSyncTime = [self.userDefaults objectForKey:kUserDefaultsLastSyncKey];
     if (lastSyncTime) {
         NSDate *currentTime = [[NSDate alloc] init];
-        return [currentTime timeIntervalSinceDate:lastSyncTime] >= kOneHourTimeInterval;
+        return [currentTime timeIntervalSinceDate:lastSyncTime] >= kFifteenMinuteTimeInterval;
     } else {
         return true;
     }
