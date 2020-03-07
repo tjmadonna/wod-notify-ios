@@ -83,7 +83,7 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
 
         if (uid && title && author && relativeUrl && summary) {
 
-            NSDate *date = [dateFormatter dateFromString:title];
+            NSDate *date = [self parseDataFromTitle:title withDataFormatter:dateFormatter];
             NSString *url = [[NSString alloc] initWithFormat:@"%@%@", kNetworkDataManagerBaseUrl, relativeUrl];
 
             if (date && url) {
@@ -98,6 +98,26 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
     }
 
     return wodModelArray;
+}
+
+- (nullable NSDate *)parseDataFromTitle:(nonnull NSString *)title
+                      withDataFormatter: (nonnull NSDateFormatter *)dateFormatter {
+
+    // Try to parse the date
+    NSDate *date = [dateFormatter dateFromString:title];
+    if (date) {
+        return date;
+    } else {
+        // Try splitting the title into words and parsing each word
+        for (NSString *word in [title componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]) {
+            NSDate *date = [dateFormatter dateFromString:word];
+            if (date) {
+                return date;
+            }
+        }
+    }
+
+    return nil;
 }
 
 @end
