@@ -12,20 +12,37 @@
 
 @property (strong, nonatomic) NSURLSession * urlSession;
 
+@property (readonly, nonatomic) NSArray<NSDateFormatter *> * dateFormatters;
+
 @end
 
 @implementation NetworkDataManager
 
-NSString * const kNetworkDataManagerDateFormat = @"MMddyyyy";
+const NSString *kNetworkDataManagerDateFormats[] = {@"MM/dd/yyyy", @"MMddyyyy"};
 
-NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com";
+const int kNetworkDataManagerDateFormatsSize = 2;
+
+const NSString *kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com";
 
 - (instancetype)initWithURLSession:(NSURLSession *)urlSession {
     self = [super init];
     if (self) {
         _urlSession = urlSession;
+        _dateFormatters = [NetworkDataManager generateDateFormatters];
     }
     return self;
+}
+
++ (NSArray<NSDateFormatter *> *)generateDateFormatters {
+    NSArray<NSString *> *dateFormats = [[NSArray alloc] initWithObjects:kNetworkDataManagerDateFormats
+                                                                  count:kNetworkDataManagerDateFormatsSize];
+    NSMutableArray<NSDateFormatter *> *dateFormatters = [[NSMutableArray alloc] initWithCapacity:dateFormats.count];
+    for (NSString *dateFormat in dateFormats) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = dateFormat;
+        [dateFormatters addObject:dateFormatter];
+    }
+    return dateFormatters;
 }
 
 - (void)getWodsWithCompletion:(WodRemoteCompletion)completion {
@@ -69,8 +86,8 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
 }
 
 - (NSArray<WodModel *> *)mapJsonToWodModelArray:(NSArray<NSDictionary *> *)jsonDictArray {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = kNetworkDataManagerDateFormat;
+
+    NSArray<NSDateFormatter *> *dateFormatters = self.dateFormatters;
 
     NSMutableArray<WodModel *> *wodModelArray = [[NSMutableArray alloc] init];
 
@@ -83,7 +100,7 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
 
         if (uid && title && author && relativeUrl && summary) {
 
-            NSDate *date = [self parseDataFromTitle:title withDataFormatter:dateFormatter];
+            NSDate *date = [self parseDateFromTitle:title withDateFormatters:dateFormatters];
             NSString *url = [[NSString alloc] initWithFormat:@"%@%@", kNetworkDataManagerBaseUrl, relativeUrl];
 
             if (date && url) {
@@ -100,16 +117,13 @@ NSString * const kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.co
     return wodModelArray;
 }
 
-- (nullable NSDate *)parseDataFromTitle:(nonnull NSString *)title
-                      withDataFormatter: (nonnull NSDateFormatter *)dateFormatter {
+- (nullable NSDate *)parseDateFromTitle:(nonnull NSString *)title
+                      withDateFormatters: (nonnull NSArray<NSDateFormatter *> *)dateFormatters {
 
-    // Try to parse the date
-    NSDate *date = [dateFormatter dateFromString:title];
-    if (date) {
-        return date;
-    } else {
-        // Try splitting the title into words and parsing each word
-        for (NSString *word in [title componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]) {
+    // Try splitting the title into words and parsing each word
+    for (NSString *word in [title componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]) {
+        // Many date format possibilities
+        for (NSDateFormatter *dateFormatter in dateFormatters) {
             NSDate *date = [dateFormatter dateFromString:word];
             if (date) {
                 return date;
