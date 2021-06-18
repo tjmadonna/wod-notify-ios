@@ -18,7 +18,7 @@
 
 @implementation NetworkDataManager
 
-const NSString *kNetworkDataManagerDateFormats[] = {@"MM/dd/yyyy", @"MMddyyyy"};
+const NSString *kNetworkDataManagerDateFormats[] = {@"MM/dd/yy", @"MMddyyyy"};
 
 const int kNetworkDataManagerDateFormatsSize = 2;
 
