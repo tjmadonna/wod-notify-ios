@@ -12,37 +12,21 @@
 
 @property (strong, nonatomic) NSURLSession * urlSession;
 
-@property (readonly, nonatomic) NSArray<NSDateFormatter *> * dateFormatters;
+@property (strong, nonatomic) NetworkDateParser * dateParser;
 
 @end
 
 @implementation NetworkDataManager
 
-const NSString *kNetworkDataManagerDateFormats[] = {@"MM/dd/yy", @"MMddyyyy"};
-
-const int kNetworkDataManagerDateFormatsSize = 2;
-
 const NSString *kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com";
 
-- (instancetype)initWithURLSession:(NSURLSession *)urlSession {
+- (instancetype)initWithURLSession:(NSURLSession *)urlSession dateParser:(NetworkDateParser *)dateParser {
     self = [super init];
     if (self) {
         _urlSession = urlSession;
-        _dateFormatters = [NetworkDataManager generateDateFormatters];
+        _dateParser = dateParser;
     }
     return self;
-}
-
-+ (NSArray<NSDateFormatter *> *)generateDateFormatters {
-    NSArray<NSString *> *dateFormats = [[NSArray alloc] initWithObjects:kNetworkDataManagerDateFormats
-                                                                  count:kNetworkDataManagerDateFormatsSize];
-    NSMutableArray<NSDateFormatter *> *dateFormatters = [[NSMutableArray alloc] initWithCapacity:dateFormats.count];
-    for (NSString *dateFormat in dateFormats) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = dateFormat;
-        [dateFormatters addObject:dateFormatter];
-    }
-    return dateFormatters;
 }
 
 - (void)getWodsWithCompletion:(WodRemoteCompletion)completion {
@@ -87,8 +71,6 @@ const NSString *kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com
 
 - (NSArray<WodModel *> *)mapJsonToWodModelArray:(NSArray<NSDictionary *> *)jsonDictArray {
 
-    NSArray<NSDateFormatter *> *dateFormatters = self.dateFormatters;
-
     NSMutableArray<WodModel *> *wodModelArray = [[NSMutableArray alloc] init];
 
     for (NSDictionary *jsonDict in jsonDictArray) {
@@ -100,7 +82,7 @@ const NSString *kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com
 
         if (uid && title && author && relativeUrl && summary) {
 
-            NSDate *date = [self parseDateFromTitle:title withDateFormatters:dateFormatters];
+            NSDate *date = [self.dateParser parseDate:title];
             NSString *url = [[NSString alloc] initWithFormat:@"%@%@", kNetworkDataManagerBaseUrl, relativeUrl];
 
             if (date && url) {

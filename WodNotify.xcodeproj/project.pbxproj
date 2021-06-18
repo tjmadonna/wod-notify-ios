@@ -14,6 +14,7 @@
 		B432E70C23B2C9040036AA04 /* WodListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B432E70923B2C9040036AA04 /* WodListViewController.m */; };
 		B43B3FAB23BA903E00B43C57 /* WodItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B43B3FA923BA903E00B43C57 /* WodItemCell.m */; };
 		B43B3FAC23BA903E00B43C57 /* WodItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43B3FAA23BA903E00B43C57 /* WodItemCell.xib */; };
+		B449B021267CF37D00E2A6AC /* NetworkDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B449B020267CF37D00E2A6AC /* NetworkDateParser.m */; };
 		B44D9D3423B7E16A007A4EC5 /* ApplicationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B44D9D3323B7E16A007A4EC5 /* ApplicationComponent.m */; };
 		B480559723C01F1500E27CAF /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B480559623C01F1500E27CAF /* NotificationManager.m */; };
 		B4956B5923B2AFD3001C8391 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4956B5823B2AFD3001C8391 /* AppDelegate.m */; };
@@ -45,6 +46,8 @@
 		B43B3FA823BA903E00B43C57 /* WodItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WodItemCell.h; sourceTree = "<group>"; };
 		B43B3FA923BA903E00B43C57 /* WodItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WodItemCell.m; sourceTree = "<group>"; };
 		B43B3FAA23BA903E00B43C57 /* WodItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WodItemCell.xib; sourceTree = "<group>"; };
+		B449B01F267CF37D00E2A6AC /* NetworkDateParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkDateParser.h; sourceTree = "<group>"; };
+		B449B020267CF37D00E2A6AC /* NetworkDateParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkDateParser.m; sourceTree = "<group>"; };
 		B44D9D3223B7E16A007A4EC5 /* ApplicationComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationComponent.h; sourceTree = "<group>"; };
 		B44D9D3323B7E16A007A4EC5 /* ApplicationComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationComponent.m; sourceTree = "<group>"; };
 		B480559523C01F1500E27CAF /* NotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 			children = (
 				B4C70FF323BEABF50088FF15 /* NetworkDataManager.h */,
 				B4C70FF423BEABF50088FF15 /* NetworkDataManager.m */,
+				B449B01F267CF37D00E2A6AC /* NetworkDateParser.h */,
+				B449B020267CF37D00E2A6AC /* NetworkDateParser.m */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				B432E70723B2C33E0036AA04 /* WodListPresenter.m in Sources */,
 				B4FE9F0F23B2CFB400788EEF /* CoreDataManager.m in Sources */,
 				B4C7100F23BEC2090088FF15 /* WodModel.m in Sources */,
+				B449B021267CF37D00E2A6AC /* NetworkDateParser.m in Sources */,
 				B4FE9F0923B2CDE700788EEF /* Model.xcdatamodeld in Sources */,
 				B4C7100B23BEBF3E0088FF15 /* SyncDataManager.m in Sources */,
 				B480559723C01F1500E27CAF /* NotificationManager.m in Sources */,

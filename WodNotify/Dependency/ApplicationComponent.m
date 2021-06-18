@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataManager.h"
 #import "NetworkDataManager.h"
+#import "NetworkDateParser.h"
 #import "SyncDataManager.h"
 #import "NotificationManager.h"
 #import "BackgroundTaskManager.h"
@@ -58,7 +59,9 @@
 
 - (NetworkDataManager *)networkDataManager {
     if (!_networkDataManager) {
-        _networkDataManager = [[NetworkDataManager alloc] initWithURLSession:[NSURLSession sharedSession]];
+        NetworkDateParser *dateParser = [[NetworkDateParser alloc] init];
+        _networkDataManager = [[NetworkDataManager alloc] initWithURLSession:[NSURLSession sharedSession]
+                                                                  dateParser:dateParser];
     }
     return _networkDataManager;
 }
