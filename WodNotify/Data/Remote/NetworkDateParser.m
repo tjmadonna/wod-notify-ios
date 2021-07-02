@@ -10,68 +10,57 @@
 
 @interface NetworkDateParser ()
 
-@property (readonly, nonatomic) NSArray<NSDateFormatter *> * dateFormatters;
-
-@property (strong, nonatomic) NSDateFormatter * preferredDateFormatter;
-
-@property (assign, nonatomic) NSUInteger preferredIndex;
+@property (readonly, nonatomic) NSDateFormatter * dateFormatter;
 
 @end
 
 @implementation NetworkDateParser
 
-const NSString *kNetworkDataManagerDateFormats[] = {@"MM/dd/yy", @"MMddyyyy"};
+// Regex pattern used to extract date from url
+NSString *const kNetworkDateParserUrlPattern = @"^\\/wods\\/([0-9]{4}\\/[0-9]{1,2}\\/[0-9]{1,2})\\/(?:[a-zA-Z0-9-]+)$";
 
-const int kNetworkDataManagerDateFormatsSize = 2;
+// Date formatter used to convert extract date string to date
+NSString *const kNetworkDataManagerDateFormat = @"yyyy/MM/dd";
 
+/// Initialize a NetworkDateParser
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _dateFormatters = [self generateDateFormatters];
-        _preferredDateFormatter = [_dateFormatters firstObject];
-        _preferredIndex = 0;
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = kNetworkDataManagerDateFormat;
     }
     return self;
 }
 
-- (NSArray<NSDateFormatter *> *)generateDateFormatters {
-    NSArray<NSString *> *dateFormats = [[NSArray alloc] initWithObjects:kNetworkDataManagerDateFormats
-                                                                  count:kNetworkDataManagerDateFormatsSize];
-    NSMutableArray<NSDateFormatter *> *dateFormatters = [[NSMutableArray alloc] initWithCapacity:dateFormats.count];
-    for (NSString *dateFormat in dateFormats) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = dateFormat;
-        [dateFormatters addObject:dateFormatter];
-    }
-    return dateFormatters;
-}
+/// Get the date from the given url with the format /wods/yyyy/MM/dd/{some-time}
+/// @param urlString url which date should be extracted
+/// @returns date that was extracted from the url (nullable)
+- (NSDate *)parseDate:(NSString *)urlString {
 
-- (NSDate *)parseDate:(NSString *)dateString {
+    // This seems to be the most reliable way of parsing the date since url scheme should not change
 
-    // We try to parse with the preferred dateformatter and word index. This is an optimization
-    NSArray<NSString *> *splitDateString = [dateString componentsSeparatedByCharactersInSet:
-                                            [NSCharacterSet whitespaceCharacterSet]];
-    NSString *potentialDateString = [splitDateString objectAtIndex:self.preferredIndex];
-    if (potentialDateString) {
-        NSDate *potentialDate = [self.preferredDateFormatter dateFromString:potentialDateString];
-        if (potentialDate)
-            return potentialDate;
+    NSError *error = nil;
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:kNetworkDateParserUrlPattern
+                                                                                options:NSRegularExpressionCaseInsensitive
+                                                                                  error:&error];
+    if (error) {
+        return nil;
     }
 
-    // Try splitting the title into words and parsing each word
-    NSUInteger index = 0;
-    for (NSString *word in splitDateString) {
-        // Many date format possibilities
-        for (NSDateFormatter *dateFormatter in self.dateFormatters) {
-            NSDate *date = [dateFormatter dateFromString:word];
+    NSArray<NSTextCheckingResult *> *matches = [expression matchesInString:urlString
+                                                                   options:0
+                                                                     range:NSMakeRange(0, [urlString length])];
+
+    for (NSTextCheckingResult *match in matches) {
+
+        if ([match numberOfRanges] == 2) {
+            NSRange captureRange = [match rangeAtIndex:1];
+            NSString *capturedDate = [urlString substringWithRange:captureRange];
+            NSDate *date =[self.dateFormatter dateFromString:capturedDate];
             if (date) {
-                // We found the date and format, mark them as preferred
-                self.preferredDateFormatter = dateFormatter;
-                self.preferredIndex = index;
                 return date;
             }
         }
-        index++;
     }
 
     return nil;
