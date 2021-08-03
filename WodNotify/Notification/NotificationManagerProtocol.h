@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createNotificationWithWodModelArray:(NSArray<WodModel *> *)wodModelArray;
 
+- (void)clearNotifications;
+
 @end
 
 @protocol NotificationManagerDelegate <NSObject>

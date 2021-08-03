@@ -33,4 +33,8 @@
     [self.appComponent.backgroundTaskManager scheduleWodSyncBackgroundTask];
 }
 
+- (void)sceneDidBecomeActive:(UIScene *)scene {
+    [self.appComponent.notificationManager clearNotifications];
+}
+
 @end

@@ -87,8 +87,6 @@ NSString * const kWodModelKey = @"wodModel";
 didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)(void))completionHandler {
 
-    [self clearNotifications];
-
     WodModel *model = response.notification.request.content.userInfo[kWodModelKey];
     if (model && delegate) {
         [delegate notificationManager:self didSelectNotificationWithWodModel:model];
