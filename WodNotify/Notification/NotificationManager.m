@@ -6,6 +6,7 @@
 //  Copyright © 2020 Tyler Madonna. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "NotificationManager.h"
 
 @interface NotificationManager ()
@@ -32,7 +33,7 @@ NSString * const kWodModelKey = @"wodModel";
 }
 
 - (void)requestPermissions {
-    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge;
     [self.userNotificationCenter requestAuthorizationWithOptions:options
                                                completionHandler:^(BOOL granted, NSError * _Nullable error) {
     }];
@@ -50,13 +51,17 @@ NSString * const kWodModelKey = @"wodModel";
 
 - (void)sendNotification:(NSArray<WodModel *> *)wodModelArray {
     UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-    content.title = wodModelArray.firstObject.title;
-    content.body = @"A new wod was posted";
     content.sound = [UNNotificationSound defaultSound];
+    content.badge = @1;
 
-    WodModel *model = wodModelArray.firstObject;
-    if (model) {
+    if (wodModelArray.count == 1) {
+        WodModel *model = wodModelArray.firstObject;
+        content.title = wodModelArray.firstObject.title;
+        content.body = @"A new wod was posted";
         content.userInfo = @{kWodModelKey : model};
+    } else {
+        content.title = wodModelArray.firstObject.title;
+        content.body = [[NSString alloc] initWithFormat:@"%lu new wods were posted", (unsigned long)wodModelArray.count];
     }
 
     UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:1 repeats:NO];
@@ -72,11 +77,17 @@ NSString * const kWodModelKey = @"wodModel";
     }];
 }
 
+- (void)clearNotifications {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
+
 # pragma mark UNUserNotificationCenterDelegate
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)(void))completionHandler {
+
+    [self clearNotifications];
 
     WodModel *model = response.notification.request.content.userInfo[kWodModelKey];
     if (model && delegate) {
