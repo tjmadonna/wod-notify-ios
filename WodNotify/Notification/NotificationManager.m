@@ -56,7 +56,7 @@ NSString * const kWodModelKey = @"wodModel";
 
     if (wodModelArray.count == 1) {
         WodModel *model = wodModelArray.firstObject;
-        content.title = wodModelArray.firstObject.title;
+        content.title = model.title;
         content.body = @"A new wod was posted";
         content.userInfo = @{kWodModelKey : model};
     } else {
