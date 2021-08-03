@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ApplicationComponent.h"
+#import "NotificationManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ApplicationRouter : NSObject
+@interface ApplicationRouter : NSObject <NotificationManagerDelegate>
 
 - (instancetype)initWithWindow:(UIWindow *)window applicationComponent:(ApplicationComponent *)applicationComponent;
 

@@ -20,10 +20,13 @@
 
     self.appComponent = [ApplicationComponent sharedComponent];
     self.appRouter = [[ApplicationRouter alloc] initWithWindow:self.window applicationComponent:self.appComponent];
-    [self.appRouter navigateToWodListViewController];
 
     [self.appComponent.notificationManager requestPermissions];
     [self.appComponent.backgroundTaskManager registerWodSyncBackgroundTask];
+
+    self.appComponent.notificationManager.delegate = self.appRouter;
+
+    [self.appRouter navigateToWodListViewController];
 }
 
 - (void)sceneDidEnterBackground:(UIScene *)scene {

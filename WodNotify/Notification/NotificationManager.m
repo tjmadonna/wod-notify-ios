@@ -18,10 +18,15 @@
 
 NSString * const kNewWodNotificationId = @"com.madonnaapps.WodNotify.NewWodNotification";
 
+NSString * const kWodModelKey = @"wodModel";
+
+@synthesize delegate;
+
 - (instancetype)initWithUserNotificationCenter:(UNUserNotificationCenter *)userNotificationCenter {
     self = [super init];
     if (self) {
         _userNotificationCenter = userNotificationCenter;
+        _userNotificationCenter.delegate = self;
     }
     return self;
 }
@@ -49,6 +54,11 @@ NSString * const kNewWodNotificationId = @"com.madonnaapps.WodNotify.NewWodNotif
     content.body = @"A new wod was posted";
     content.sound = [UNNotificationSound defaultSound];
 
+    WodModel *model = wodModelArray.firstObject;
+    if (model) {
+        content.userInfo = @{kWodModelKey : model};
+    }
+
     UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:1 repeats:NO];
 
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:kNewWodNotificationId
@@ -60,6 +70,20 @@ NSString * const kNewWodNotificationId = @"com.madonnaapps.WodNotify.NewWodNotif
             NSLog(@"Error sending notification");
         }
     }];
+}
+
+# pragma mark UNUserNotificationCenterDelegate
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)(void))completionHandler {
+
+    WodModel *model = response.notification.request.content.userInfo[kWodModelKey];
+    if (model && delegate) {
+        [delegate notificationManager:self didSelectNotificationWithWodModel:model];
+    }
+
+    completionHandler();
 }
 
 @end

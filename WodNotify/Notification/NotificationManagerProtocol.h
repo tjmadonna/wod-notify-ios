@@ -13,11 +13,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol NotificationManagerDelegate;
+
 @protocol NotificationManagerProtocol <NSObject>
+
+@property (nullable, weak) id<NotificationManagerDelegate> delegate;
 
 - (void)requestPermissions;
 
 - (void)createNotificationWithWodModelArray:(NSArray<WodModel *> *)wodModelArray;
+
+@end
+
+@protocol NotificationManagerDelegate <NSObject>
+
+- (void)notificationManager:(id<NotificationManagerProtocol>)notificationManager didSelectNotificationWithWodModel:(WodModel *)wodModel;
 
 @end
 

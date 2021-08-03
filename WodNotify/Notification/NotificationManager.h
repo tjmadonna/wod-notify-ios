@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NotificationManager : NSObject <NotificationManagerProtocol>
+@interface NotificationManager : NSObject <NotificationManagerProtocol, UNUserNotificationCenterDelegate>
 
 - (instancetype)initWithUserNotificationCenter:(UNUserNotificationCenter *)userNotificationCenter;
 
