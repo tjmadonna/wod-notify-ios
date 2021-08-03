@@ -15,12 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserNotificationCenter:(UNUserNotificationCenter *)userNotificationCenter;
 
-- (void)requestPermissions;
-
-- (void)createNotificationWithWodModelArray:(NSArray<WodModel *> *)wodModelArray;
-
-- (void)clearNotifications;
-
 @end
 
 NS_ASSUME_NONNULL_END
