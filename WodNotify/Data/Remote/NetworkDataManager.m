@@ -82,15 +82,7 @@ const NSString *kNetworkDataManagerBaseUrl = @"https://www.crossfitathletics.com
 
         if (uid && title && author && relativeUrl && summary) {
 
-            NSDate *postedDate = [self.dateParser parseDate:relativeUrl];
-            NSDate *date = nil;
-
-            if (postedDate) {
-                // Wods are posted the day before, add one day to get workout date
-                NSCalendar *calendar = [NSCalendar currentCalendar];
-                NSCalendarUnit day = NSCalendarUnitDay;
-                date = [calendar dateByAddingUnit:day value:1 toDate:postedDate options:NSCalendarMatchStrictly];
-            }
+            NSDate *date = [self.dateParser parseDate:title];
 
             NSString *url = [[NSString alloc] initWithFormat:@"%@%@", kNetworkDataManagerBaseUrl, relativeUrl];
 
