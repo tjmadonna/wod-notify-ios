@@ -59,7 +59,7 @@
 #pragma mark NotificationManagerDelegate
 
 - (void)notificationManager:(nonnull id<NotificationManagerProtocol>)notificationManager didSelectNotificationWithWodModel:(nonnull WodModel *)wodModel {
-
+    [self navigateToWodDetailViewController:wodModel];
 }
 
 @end
