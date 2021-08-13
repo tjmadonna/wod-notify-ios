@@ -16,6 +16,8 @@
 
 @protocol WodListViewProtocol
 
+- (void)hideRefreshControl;
+
 - (void)presentWodList:(NSArray<WodListViewItem *> *)wodList;
 
 @end

@@ -90,6 +90,8 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
                 NSLog(@"%lu new wods saved to local data", newWods.count);
             }
         }];
+    } else {
+        [self.view hideRefreshControl];
     }
 }
 
@@ -109,6 +111,7 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
         NSArray<WodListViewItem *> *wodListViewItemArray = [self mapWodModelArrayToWodListViewItemArray:wods];
 
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view hideRefreshControl];
             [self.view presentWodList:wodListViewItemArray];
         });
     }];
