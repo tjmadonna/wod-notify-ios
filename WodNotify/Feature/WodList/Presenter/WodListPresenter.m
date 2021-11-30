@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) ApplicationRouter * router;
 
+@property (assign, nonatomic) BOOL fetchingWods;
+
 @end
 
 @implementation WodListPresenter
@@ -36,6 +38,7 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
         _syncDataManager = syncDataManager;
         _notificationCenter = notificationCenter;
         _router = router;
+        _fetchingWods = NO;
         [self registerWodModelDataChangeNotification];
     }
     return self;
@@ -96,6 +99,10 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
 }
 
 - (void)fetchWodsFromLocalDataManager {
+    if (self.fetchingWods)
+        return;
+
+    [self setFetchingWods:YES];
     [self.localDataManager getAllWodsWithCompletion:^(NSArray<WodModel *> * _Nullable wods,
                                                       NSError * _Nullable error) {
         if (error) {
@@ -111,6 +118,7 @@ NSString * const kDateFormat = @"MMMM-dd-EEEE";
         NSArray<WodListViewItem *> *wodListViewItemArray = [self mapWodModelArrayToWodListViewItemArray:wods];
 
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self setFetchingWods:NO];
             [self.view hideRefreshControl];
             [self.view presentWodList:wodListViewItemArray];
         });
