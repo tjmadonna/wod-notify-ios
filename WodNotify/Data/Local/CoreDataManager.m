@@ -51,6 +51,7 @@ NSString *const kLocalDataManagerWodModelDataChangedNotification = @"kLocalDataM
         NSFetchRequest *fetchRequest = [WodLocalModel fetchRequest];
         fetchRequest.predicate = [NSPredicate predicateWithValue:YES];
         fetchRequest.sortDescriptors = @[ [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] ];
+        fetchRequest.fetchLimit = 100;
 
         NSError *error;
         NSArray<WodLocalModel *> *wods = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
