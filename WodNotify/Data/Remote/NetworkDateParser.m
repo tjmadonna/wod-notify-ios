@@ -51,11 +51,13 @@ const int kNetworkDataManagerDateFormatsSize = 2;
     // We try to parse with the preferred dateformatter and word index. This is an optimization
     NSArray<NSString *> *splitDateString = [dateString componentsSeparatedByCharactersInSet:
                                             [NSCharacterSet whitespaceCharacterSet]];
-    NSString *potentialDateString = [splitDateString objectAtIndex:self.preferredIndex];
-    if (potentialDateString) {
-        NSDate *potentialDate = [self.preferredDateFormatter dateFromString:potentialDateString];
-        if (potentialDate)
-            return potentialDate;
+    if (self.preferredIndex < splitDateString.count) {
+        NSString *potentialDateString = [splitDateString objectAtIndex:self.preferredIndex];
+        if (potentialDateString) {
+            NSDate *potentialDate = [self.preferredDateFormatter dateFromString:potentialDateString];
+            if (potentialDate)
+                return potentialDate;
+        }
     }
 
     // Try splitting the title into words and parsing each word
